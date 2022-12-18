@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "UserLogin";
+}
+<div class="form-center">
+        <form action="/Login" method="POST">
+            
+                <div class="my_tbl" style="text-align:center; background-color:antiquewhite;">
+                    <div class="my_row">
+                        <div class="my_cell">
+                            Username:
+                        </div>
+                        <div class="my_cell">
+                            <input name="username" />
+                        </div>
+                    </div>
+                    <div class="my_row">
+                        <div class="my_cell">
+                            Password:
+                        </div>
+                        <div class="my_cell">
+                            <input name="password" type="password" />
+                        </div>
+                    </div>
+                    <div class="my_row">
+                        <div class="my_cell"></div>
+                        <div class="my_cell" style="text-align: center">
+                            <input type="submit" value="Login" class="btn btn-primary" />
+                        </div>
+                    </div>
+                    <tr>
+                            <p style="color:red;">  @ViewData["UserLoginFailed"] </p>
+                    </tr>
+                </div>
+           
+        </form>
+</div>

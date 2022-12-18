@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "View Cart";
+
+    var cart = (Cart)ViewData["cart"];
+
+    int? userId = cart.UserId;
+
+    Dictionary<Product, int> cartItems = cart.CartItems;
+
+    int totalAmt = 0;
+}
+
+
+@if (cartItems.Count == 0)
+{
+    <h4> Cart is empty.  <button class="btn btn-light"> <a class="link-primary" asp-area="" asp-controller="Browse" asp-action="Index"> Back to Home</a></button> </h4>
+}
+else if (cartItems.Count >= 1)
+{
+    @for (int i = 0; i < cartItems.Count; i++)
+    {
+
+        Product product = cartItems.ElementAt(i).Key;
+        int qty = cartItems[cartItems.ElementAt(i).Key];
+        int price = product.Price * qty;
+        totalAmt += price;
+    }
+
+
+    <table class="tab" style="width:100%">
+        <tr>
+            <td style="width:75%">
+                <a type="button" onlick="up()" class="btn btn-primary btn-info" href="@Url.Action("Index","Browse")">Continue Shopping</a>
+                <span> | </span>
+                <a type="button" onclick="down()" class="btn btn-primary btn-info" href="@Url.Action("CheckoutHandler","Checkout", new {uId = userId})">Checkout</a>
+            </td>
+            <td style="text-align:right">
+                <b>Total Amount:$<span id="totalamount"> @totalAmt </span></b>
+            </td>
+        </tr>
+    </table>
+
+
+
+    <table class="pkp-table">
+
+        @for (int i = 0; i < cartItems.Count; i++)
+        {
+
+            Product product = cartItems.ElementAt(i).Key;
+            int qty = cartItems[cartItems.ElementAt(i).Key];
+            int price = product.Price * qty;
+
+
+            <tr>
+
+                <td width=30%>
+                    <div class="left">
+                        <div class="img">
+                            <img src="~/images/@product.Image" width=55% />
+                        </div>
+
+                    </div>
+                </td>
+
+
+
+                <td width=70%>
+                    <div class="right">
+                        <div><b>Product Name:</b> @product.ProductName</div>
+                        <div> <b>Product Description:</b> @product.Description </div>
+
+                        <div>
+                            <b>Quantity:</b>
+                            <form>
+                                <div class="qty-button" id="qty_increase"></div>
+                                <input class="quantity-input" type="number" id="@product.ProductId" min="0" value="@qty" userId="@userId" unitPrice="@product.Price" />
+                                <div class="qty-button" id="qty_decrease"></div>
+                            </form>
+                        </div>
+
+                        <b>Price:</b> $<span id="price_@product.ProductId">@price</span>
+
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
+

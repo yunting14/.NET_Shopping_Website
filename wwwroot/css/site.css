@@ -1,0 +1,218 @@
+﻿html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  padding: 2%;
+}
+
+body {
+    margin-bottom: 60px;
+    
+   
+}
+
+
+.card {
+    float: left;
+    margin: 8px;
+    height: 600px;
+    width: 31%;
+    display: block;
+    margin-left: 20px;
+    margin-right: 1px;
+
+}
+
+.form-range{
+    margin-bottom: 150px;
+}
+
+.card-img-top{
+    
+    height: 95%;
+    width:95%;
+    
+}
+
+.imageBox{
+    height: 400px;
+}
+
+.highlighted {
+    font-weight: 800;
+    text-decoration: underline;
+}
+
+
+card-body{
+    margin-bottom: 200px;
+}
+
+.my_tbl {
+    display: inline-block;
+    padding: 0.5em;
+    border: 2px solid #5499c7;
+}
+
+.my_row {
+    display: table-row;
+}
+
+.my_cell {
+    display: table-cell;
+    padding: 0.5em;
+}
+
+.head {
+    width: 80%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+h4 {
+    display: inline-block;
+    text-align: left;
+}
+
+.nav {
+    display: inline-block;
+    text-align: right;
+}
+
+    .nav li {
+        display: inline-block;
+    }
+
+.pkp-table {
+    margin: auto;
+    width: 90%;
+    text-align: center;
+}
+
+.left {
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 3px solid lightgrey;
+}
+
+.right {
+    margin-left: 30px;
+    text-align: left;
+}
+
+
+
+/*star testing*/
+.rating input {
+    display: none;
+}
+
+.rating {
+    float: left;
+    border: none;
+}
+
+    .rating:not(:checked) > input {
+        position: relative;
+        clip: rect(0, 0, 0, 0);
+    }
+
+    .rating:not(:checked) > label {
+        float: right;
+        width: 1em;
+        padding: 0 .1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 200%;
+        line-height: 1.2;
+        color: #ddd;
+    }
+
+        .rating:not(:checked) > label:before {
+            content: '★ ';
+        }
+
+    .rating > input:checked ~ label {
+        color: #f70;
+    }
+
+    .rating:not(:checked) > label:hover,
+    .rating:not(:checked) > label:hover ~ label {
+        color: gold;
+    }
+
+    .rating > input:checked + label:hover,
+    .rating > input:checked + label:hover ~ label,
+    .rating > input:checked ~ label:hover,
+    .rating > input:checked ~ label:hover ~ label,
+    .rating > label:hover ~ input:checked ~ label {
+        color: #ea0;
+    }
+
+    .rating > label:active {
+        position: relative;
+    }
+
+/*MY*/
+
+.item {
+    margin-left: auto;
+    margin-right: auto;
+    border-color: black;
+    background-color: #fff5ee
+}
+
+
+
+*,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.cart-icon {
+    text-align: right;
+}
+
+:root {
+    --after-content: '2';
+}
+
+.non-empty::after {
+    content: var(--after-content);
+    font-size: 20px;
+    width: 20px;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    top: -15px;
+    right: 20%;
+    background-color: yellow;
+    border-radius: 50%;
+}
+
+.checked {
+    color: orange;
+}
+
+.form-center {
+    display: flex;
+    justify-content: center;
+}
+
+
+.tab {
+    margin-left: 5%;
+}

@@ -1,0 +1,82 @@
+﻿@using Team2_DotNetCA.Models;
+@model Team2_DotNetCA.Models.Purchase;
+@{
+    ViewData["Title"] = "Home Page";
+    var list = ViewData["list"] as List<Purchase>; 
+}
+    
+@if (list.Count == 0)
+{
+    <h4> You have no purchases </h4>
+}
+else
+{
+    <div>
+        @foreach (var purchase in list)
+        {
+
+            @foreach (var product in purchase.p_list)
+            {
+                <table class="pkp-table">
+                    <tr>
+                        <th width=30%>
+                            <div class="left">
+                                <div class="img"><img src="~/images/@product.Image" width=40% /></div>
+                                <div><p>@product.Name</p></div>
+                                <div><p>@product.Details</p></div>
+                                <div><button type="button" class="btn btn-light">Download</button></div>
+                            </div>
+                        </th>
+                        <th width=70%>
+                            <div class="right">
+                                <div>
+                                    <b>Purchase on: </b>@purchase.PurchaseDate.ToString("%d MMM, yyyy")
+                                </div>
+                                <div><b>Quantity: </b>@product.ACList.Count()</div>
+                                <div>
+                                    <b>Activation Code: </b>
+                                    <select>
+                                        @foreach (var ac in product.ACList)
+                                        {
+                                            <option class="btn btn-light">@ac</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div>
+                                    <div>
+                                        <br />
+                                        <b>Rating: </b>
+                                    </div>
+                                    <div class="rating">
+
+                                        <input type="radio" class="star 5_@product.ProductId form-check-input" id="star5_@product.ProductId" name="@purchase.PurchaseId @product.ProductId" value="5" />
+                                        <label class="form-check-label" for="star5_@product.ProductId" title="text">★</label>
+
+
+                                        <input type="radio" class="star 4_@product.ProductId form-check-input" id="star4_@product.ProductId" name="@purchase.PurchaseId @product.ProductId" value="4" />
+                                        <label class="form-check-label" for="star4_@product.ProductId" title="text">★</label>
+
+
+                                        <input type="radio" class="star 3_@product.ProductId form-check-input" id="star3_@product.ProductId" name="@purchase.PurchaseId @product.ProductId" value="3" />
+                                        <label class="form-check-label" for="star3_@product.ProductId" title="text">★</label>
+
+
+                                        <input type="radio" class="star 2_@product.ProductId form-check-input" id="star2_@product.ProductId" name="@purchase.PurchaseId @product.ProductId" value="2" />
+                                        <label class="form-check-label" for="star2_@product.ProductId" title="text">★</label>
+
+
+                                        <input type="radio" class="star 1_@product.ProductId form-check-input" id="star1_@product.ProductId" name="@purchase.PurchaseId @product.ProductId" value="1" />
+                                        <label class="form-check-label" for="star1_@product.ProductId" title="text">★</label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+            }
+        }
+    </div>
+}
+
+

@@ -1,0 +1,138 @@
+﻿@*<script src="https://kit.fontawesome.com/8f27d68390.js"
+        crossorigin="anonymous"></script>*@
+@{
+    ViewData["Title"] = "Search Page";
+    var products = (List<Product>)ViewData["products"];
+    var person = (User)ViewData["login"];
+    string keyword = (string)ViewData["keyword"];
+}
+
+
+<script
+    src="https://kit.fontawesome.com/8f27d68390.js"
+    crossorigin="anonymous">
+    </script>
+
+
+
+
+<div class="cart-icon">
+        <a class="button" id="load-btn"  asp-controller="Browse" asp-action="UserAddItem"><i class="fas fa-cart-arrow-down fa-2x "></i></a>
+</div>
+
+<div class="searchBtn">
+    <form asp-controller="Search" asp-action="Search">
+        <p>
+            Search: <input type="text" name="keyword" />
+            <input type="submit" value="Search..." />
+        </p>
+    </form>
+</div>
+
+@if(products.Count == 0)
+{
+    <h2>No items found for "@keyword".</h2>
+}
+else if(products.Count == 1)
+{
+    <table><tr><td>
+ <form method="post" class="form-range">
+     @foreach (var item in products)
+    {
+        string Name = Highlight(keyword, item.ProductName);
+        string desc = Highlight(keyword, item.Description);
+
+        <div class="card" style="width:100%" >
+            <div class="imageBox"><img src="~/images/@item.Image" class="card-img-top"></div>
+            <div class="card-body">
+                <h5 class="card-title">@Html.Raw(Name)</h5>
+                <p class="card-text">@Html.Raw(desc)</p>
+                <label>
+                <button class="btn btn-primary" formaction="AddToCart?productId=@item.ProductId" >$@item.Price - Add to Cart</button>
+                </label>
+            </div>
+        </div>
+    
+    }
+ </form>
+</td></tr></table>
+}
+else
+{
+   <table><tr><td>
+ <form method="post" class="form-range">
+
+@foreach (var item in products)
+{
+        string Name = Highlight(keyword, item.ProductName);
+        string desc = Highlight(keyword, item.Description);
+
+        <div class="card" >
+            <div class="imageBox"><img src="~/images/@item.Image" class="card-img-top"></div>
+            <div class="card-body">
+                <h5 class="card-title">@Html.Raw(Name)</h5>
+                <p class="card-text">@Html.Raw(desc)</p>
+                 <p class="card-text">
+                                Rating: @{
+                                    if (@item.Rating == 0)
+                                    {
+                                        <span>There is no rating yet.</span>
+                                    }else
+                                {
+                                        @for(int i = 1; i<=item.Rating; i++)
+                                        {
+                                            <span class="fa fa-star checked"></span>
+                                        }
+                                        @for(int i = item.Rating+1; i<=5; i++)
+                                        {
+                                            <span class="fa fa-star"></span>
+                                        }
+                                    
+                                }
+                                }
+                            </p>
+                <label>
+                <button id="updateCart" class="btn btn-primary" onclick="clickCount()"
+                            formaction="AddToCart?productId=@item.ProductId" name="@item.ProductId">
+                        $@item.Price - Add to Cart
+                    </button>
+                </label>
+            </div>
+        </div>
+    
+}
+</form>
+</td></tr></table> 
+}
+
+
+
+
+
+
+@functions 
+{
+    public string Highlight(string searchStr, string subject) {
+        if (searchStr == null) {
+            return subject;
+        }
+
+        int pos = subject.ToLower().IndexOf(searchStr.ToLower());
+        if (pos == -1) {
+            return subject;
+        }
+
+        if (pos == 0) {
+            return "<span class='highlighted'>" + subject.Substring(0, searchStr.Length) +
+                "</span>" + subject.Substring(searchStr.Length);
+        }
+        else {
+            return subject.Substring(0, pos) +
+                "<span class='highlighted'>" + subject.Substring(pos, searchStr.Length) +
+                "</span>" + subject.Substring(pos + searchStr.Length);
+        }
+    }
+}
+
+
+

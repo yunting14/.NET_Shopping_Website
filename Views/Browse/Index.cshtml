@@ -1,0 +1,87 @@
+﻿<script src="https://kit.fontawesome.com/8f27d68390.js"
+        crossorigin="anonymous"></script>
+@{
+    ViewData["Title"] = "Browse Page";
+    var products = (List<Product>)ViewData["products"];
+    var person = (User)ViewData["login"];
+}
+
+<head>
+    @*<!-- Font Awesome Icon Library -->*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: gold;
+        }
+    </style>
+
+    <script src="https://kit.fontawesome.com/8f27d68390.js"
+            crossorigin="anonymous">
+    </script>
+
+
+</head>
+        <form asp-controller="Browse" asp-action="Search">
+            <div class="topnav">
+                <div class="search-container">
+            <input type="text" name="keyword" placeholder="Search.." /><span> <button type="submit"><i class="fa fa-search"></i> </button></span>
+                </div>
+                
+            </div>
+        </form>
+
+
+
+    <table>
+        <tr>
+            <td>
+                <form method="post" class="form-range">
+                    @foreach (var item in products)
+                    {
+                        <div class="card">
+                            <div class="imageBox"><img src="/images/@item.Image" class="card-img-top" width=50%></div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">@item.ProductName</h5>
+                                <p class="card-text">@item.Description</p>
+                                <p class="card-text">
+                                    Rating: @{
+                                        if (@item.Rating == 0)
+                                        {
+
+                                                <span><i>There is no rating yet.</i></span>
+                                        }
+                                        else
+                                        {
+                                                @for (int i = 1; i <= item.Rating; i++)
+                                            {
+                                                    <span class="fa fa-star checked"></span>
+                                            }
+                                                @for (int i = item.Rating + 1; i <= 5; i++)
+                                            {
+                                                    <span class="fa fa-star"></span>
+                                            }
+
+                                        }
+                                    }
+                                </p>
+                                <label>
+                                <button id="updateCart" type="button" class="btn btn-primary" onclick="clickCount();WaitForClick(@item.ProductId)"
+                                            formaction="\Browse\AddToCart?productId=@item.ProductId" name="@item.ProductId">
+                                        $@item.Price - Add to Cart
+                                    </button>
+                                </label>
+                            </div>
+                        </div>
+
+                    }
+                </form>
+            </td>
+        </tr>
+    </table>
+
+
+
+
+
+

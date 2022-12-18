@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var customername = (string)ViewData["name"];
+}
+
+<h2>Shopping.com</h2>
+<h4>Home</h4>
+<hr />
+
+
+@if (customername != null)
+{
+    <table>
+        <form action="/logout/logout" method="post">
+            <div class="form-group row">
+                <div class="text-center">
+                    <div class="my_row">
+                        <h1 class="display-4">Welcome <b>@ViewData["name"]</b> </h1>
+                        <div class="my_cell"></div>
+                        <div class="my_cell" style="text-align: center">
+        <tr>
+            <input type="submit" value="Logout" class="btn btn-primary"/>
+        </tr>
+
+        </div>
+        </div>
+        </div>
+        </form>
+    </table>
+
+}
+else
+{
+    <table>
+        <form action="/Login/" method="post">
+            <div class="form-group row">
+                <div class="text-center">
+                    <div class="my_row">
+                        <h1 class="display-4">Welcome <b>@ViewData["name"]</b> </h1>
+                        <div class="my_cell"></div>
+                        <div class="my_cell" style="text-align: center">
+                            <tr>
+            <input type="submit" value="Login" class="btn btn-primary"/>
+        </tr>
+        </div>
+        </div>
+        </div>
+        </form>
+    </table>
+
+}
+
+
