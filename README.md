@@ -7,4 +7,6 @@ Core functions:
 4. Product Ratings
 5. User session & cookies
 
+Database: MSSQL
+
 Done in collaboration - please see collaborator list. 
