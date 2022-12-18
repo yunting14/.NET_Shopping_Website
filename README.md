@@ -9,4 +9,4 @@ Core functions:
 
 Database: MSSQL
 
-Done in collaboration - please see collaborator list. 
+Done in collaboration - please see collaborators. 
